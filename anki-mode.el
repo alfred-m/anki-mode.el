@@ -30,9 +30,12 @@
     (if (use-region-p)
         (progn
           (setq beg (region-beginning))
-          (if (char-equal (char-after (region-end)) 10)
-              (setq end (+ 1 (region-end)))
-            (setq end (region-end))
+          (if (< (region-end) (point-max))
+              (if (char-equal (char-after (region-end)) 10)
+                  (setq end (+ 1 (region-end)))
+                (setq end (region-end))
+                )
+            (setq end (point-max))
             )
           )
           (progn
@@ -46,6 +49,14 @@
     )
   )
 
+;; TODO: replace "replace-regexp" by loops like this:
+;; (while (re-search-forward REGEXP nil t)
+;;   (replace-match TO-STRING nil nil))
+
+;; TODO: deal properply with the inclusion of last line when using region. The
+;; current code does not apply to the last line of the region if it is also
+;; the last line of the buffer.
+
 (defun anki-remove-no-cloze()
   "Remove lines with no cloze."
   (interactive)
@@ -53,9 +64,12 @@
     (if (use-region-p)
         (progn
           (setq beg (region-beginning))
-          (if (char-equal (char-after (region-end)) 10)
-              (setq end (+ 1 (region-end)))
-            (setq end (region-end))
+          (if (< (region-end) (point-max))
+              (if (char-equal (char-after (region-end)) 10)
+                  (setq end (+ 1 (region-end)))
+                (setq end (region-end))
+                )
+            (setq end (point-max))
             )
           )
           (progn
@@ -67,7 +81,6 @@
   )
 )
 
-;; replace-regexp prend des argument optionnel pour la région.
 
 (defun cloze-region(VALUE)
   "Add '{{cX::' at region's beginning and '}}' at region's end where X is
