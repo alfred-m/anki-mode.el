@@ -23,7 +23,7 @@
 ;; TODO: fill docstring and README.
 
 (define-minor-mode anki-mode
-  "Provides functions to prepare anki notes."
+  "Provide functions to prepare anki notes."
   :lighter " Anki"
   :keymap (let ((map (make-sparse-keymap)))
             (define-key map (kbd "C-&") 'cloze-region)
@@ -47,7 +47,7 @@
 
 
 (defun anki-break-at-dot()
-  "Breaks sentence at dots."
+  "Break sentence at dots."
   (interactive)
   (let (beg end)
     (if (use-region-p)
