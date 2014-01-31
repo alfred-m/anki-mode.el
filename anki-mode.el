@@ -183,9 +183,9 @@ increment of 1."
 ;; This function derives from http://ergoemacs.org/emacs/elisp_examples.html
  (interactive)
  (let (pt)
-   (skip-chars-backward "^ \n,;:.")
+   (skip-chars-backward "^ \n,;:.(\[\"«„‘\?!")
    (setq pt (point))
-   (skip-chars-forward "^ \n,;:.")
+   (skip-chars-forward "^ \n,;:.)\]\"»”’\?!")
    (set-mark pt)
  ))
 
