@@ -1,4 +1,4 @@
-;;; anki-mode.el --- a minor mode for emacs to ease the creation of cloze deletion notes -*- coding: utf-8-unix -*-
+;;; anki-mode.el --- a minor mode for emacs to ease the creation of cloze deletion notes -*- coding: utf-8 -*-
 
 ;; Copyright (C) 2013, 2014 Sylvain Girard
 
@@ -183,9 +183,9 @@ increment of 1."
 ;; This function derives from http://ergoemacs.org/emacs/elisp_examples.html
  (interactive)
  (let (pt)
-   (skip-chars-backward "^ \n,;:.(\[\"«„‘\?!")
+   (skip-chars-backward "^ \n,;:.(\[\"«„‘\?!<")
    (setq pt (point))
-   (skip-chars-forward "^ \n,;:.)\]\"»”’\?!")
+   (skip-chars-forward "^ \n,;:.)\]\"»”’\?!>")
    (set-mark pt)
  ))
 
