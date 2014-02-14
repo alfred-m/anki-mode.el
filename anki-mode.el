@@ -44,6 +44,7 @@
  (defvar anki-counter 1 "Counter for cloze deletion.")
 ;; )
 
+(defcustom anki-field-separator "~" "Character used to delimit fields of anki notes.")
 
 
 (defun anki-break-at-dot()
@@ -68,7 +69,7 @@
       )
     (replace-regexp "\\.\n" ". " nil beg  end)
     (replace-regexp "\n" "" nil beg  end)
-    (replace-regexp "\\. +" ".|\n" nil beg end)
+    (replace-regexp "\\. +" (concat "." anki-field-separator "\n") nil beg end)
     )
   )
 
