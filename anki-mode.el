@@ -34,6 +34,8 @@
             (define-key map (kbd "C-)") (lambda ()
                                           (interactive) 
                                           (anki-increment-counter)))
+            (define-key map (kbd "M-n") (lambda () (interactive) (anki-forward-line 1)))
+            (define-key map (kbd "M-p") (lambda () (interactive) (anki-forward-line -1)))
             (define-key map (kbd "C-c C-&") 'anki-break-at-dot)
             (define-key map (kbd "C-c C-=") 'anki-remove-no-cloze)
             map)
@@ -177,6 +179,14 @@ increment of 1."
    )
   (message (concat "anki-counter: " (number-to-string anki-counter)))
 )
+
+(defun anki-forward-line(&optional N)
+  "Move N lines forward, bcward if N is negative, and reset anki-counter."
+  (interactive)
+  (forward-line N)
+  (setq anki-counter 1)
+  (message (concat "anki-counter: " (number-to-string anki-counter)))
+  )
 
 (defun anki-select-current-word()
 "Select the word under cursor.
