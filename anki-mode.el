@@ -26,14 +26,14 @@
   "Provide functions to prepare anki notes."
   :lighter " Anki"
   :keymap (let ((map (make-sparse-keymap)))
-            (define-key map (kbd "C-&") 'cloze-region)
-            (define-key map (kbd "C-=") 'set-anki-counter)
+            (define-key map (kbd "C-&") 'anki-cloze-region)
+            (define-key map (kbd "C-=") 'anki-set-counter)
             (define-key map (kbd "C-à") (lambda ()
                                           (interactive)
-                                          (increment-anki-counter -1)))
+                                          (anki-increment-counter -1)))
             (define-key map (kbd "C-)") (lambda ()
                                           (interactive) 
-                                          (increment-anki-counter)))
+                                          (anki-increment-counter)))
             (define-key map (kbd "C-c C-&") 'anki-break-at-dot)
             (define-key map (kbd "C-c C-=") 'anki-remove-no-cloze)
             map)
@@ -106,7 +106,7 @@
 )
 
 
-(defun cloze-region(VALUE)
+(defun anki-cloze-region(VALUE)
   "Add '{{cX::' at region's beginning and '}}' at region's end where X is
 anki-counter and increment anki-couter"
   (interactive "P")
@@ -114,7 +114,7 @@ anki-counter and increment anki-couter"
    ((equal current-prefix-arg nil)
     (list
      (setq VALUE anki-counter)
-     (increment-anki-counter)
+     (anki-increment-counter)
      )
     )
     ((equal current-prefix-arg '(4))
@@ -128,7 +128,7 @@ anki-counter and increment anki-couter"
 ;;
   (if
  (not (use-region-p))
-      (select-current-word)
+      (anki-select-current-word)
     )
 ;;
   (let (beg end clozebeg clozeend)
@@ -146,7 +146,7 @@ anki-counter and increment anki-couter"
   )
   )
 
-(defun increment-anki-counter(&optional DELTA)
+(defun anki-increment-counter(&optional DELTA)
   "Increment the anki counter of DELTA. If DELTA is unspecified,
 increment of 1."
   (if (not DELTA) (setq DELTA 1))
@@ -157,7 +157,7 @@ increment of 1."
                    (number-to-string anki-counter)))
   )
 
-(defun set-anki-counter(VALUE)
+(defun anki-set-counter(VALUE)
   "Set anki-counter to a VALUE passed in argument."
   (interactive "P")
   (cond
@@ -178,7 +178,7 @@ increment of 1."
   (message (concat "anki-counter: " (number-to-string anki-counter)))
 )
 
-(defun select-current-word()
+(defun anki-select-current-word()
 "Select the word under cursor.
 “word” here is considered any alphanumeric sequence with “_” or “-”."
 ;; This function derives from http://ergoemacs.org/emacs/elisp_examples.html
