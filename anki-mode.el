@@ -43,7 +43,8 @@
 )
 
 ;; (make-variable-buffer-local
- (defvar anki-counter 1 "Counter for cloze deletion.")
+ (defvar anki-counter nil "Counter for cloze deletion.")
+ (setq anki-counter 1)
 ;; )
 
 (defcustom anki-field-separator "~" "Character used to delimit fields of anki notes.")
