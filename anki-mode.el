@@ -170,7 +170,7 @@ increment of 1."
                            (number-to-string anki-counter)
                            " → "))
       (setq VALUE (read-number prompt anki-counter))
-      (if prompt (setq anki-counter VALUE))
+      (if VALUE (setq anki-counter VALUE))
       )
     )
     ((equal current-prefix-arg '(4))
